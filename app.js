@@ -1,5 +1,5 @@
 const pokedex = document.getElementById('pokedex');
-const searchInput = document.getElementById('search')
+const searchInput = document.getElementById('search-bar')
 
 let limit = 20;
 let i = 0;
