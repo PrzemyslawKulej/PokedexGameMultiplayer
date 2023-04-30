@@ -9,7 +9,7 @@ body {
 .container {
     position: relative;
     margin: 0 auto;
-    top: 50px;
+    top: 0px;
     max-width: 90vw;
     max-height: 80vh;
     overflow: auto;
@@ -17,8 +17,9 @@ body {
 
 #pokedex {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 0px;
+    grid-template-columns: repeat(5, minmax(220px, 1fr));
+    row-gap: 10px;
+    column-gap: 5px;
     padding-inline-start: 0;
 
 
@@ -26,10 +27,10 @@ body {
 /* Cards style  */
 .card {
     list-style: none;
-    max-width: 300px;
-    max-height: 150px;
+    width: 300px;
+    height: 150px;
     padding: 10px;
-    /* background-color: #d6d4d4de; */
+    background-color: #d6d4d4de;
     color: #222;
     text-align: center;
 }
@@ -59,7 +60,7 @@ body {
 
 .button {
     position: absolute;
-    left: 46%;
+    left: 50%;
     margin: 0 auto;
     transform: translate(-50%);
     bottom: 0px;
@@ -119,7 +120,7 @@ body {
 .search-container{
     position: relative;
     left: -50px;
-    top: 100px;
+    top: 50px;
     width: 290px;
     display: block;
     margin: 0 auto;
@@ -159,6 +160,12 @@ input#search-bar{
     width: 75px;
     height: 75px;
     top: -62px;
+
+}
+
+/*Styling "no result message"*/
+
+.no-results-container {
 
 }
 

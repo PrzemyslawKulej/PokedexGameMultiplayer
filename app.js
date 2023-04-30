@@ -6,6 +6,7 @@ let i = 0;
 
 let pokemonNames = []
 
+// Searchbar code
 searchInput.addEventListener("input", (e) => {
     const searchString = e.target.value
 
@@ -13,11 +14,55 @@ searchInput.addEventListener("input", (e) => {
         return (
             pokemon.name.toLowerCase().includes(searchString)
         );
+
     })
-    displayPokemon(filteredPokemons);
+    if (filteredPokemons.length === 0) {
+        displayNoResultsMessage();
+    } else {
+        removeNoResultsMessage();
+        displayPokemon(filteredPokemons);
+    }
+
 })
 
+// Function that creates no results message in searchbar
+function displayNoResultsMessage() {
+    removePreviousResults();
 
+    const noResultsMessageContainer = document.createElement('div');
+    noResultsMessageContainer.classList.add('no-results-container');
+
+    const noResultsImage = document.createElement('img');
+    noResultsImage.src = "/images/no-result-img.png";
+    noResultsImage.alt = "Nie znaleziono pokemonów o podanej nazwie";
+
+    const noResultsText = document.createElement('p');
+    noResultsText.textContent = 'Nie znaleziono pokemonów o podanej nazwie';
+
+    noResultsMessageContainer.appendChild(noResultsImage);
+    noResultsMessageContainer.appendChild(noResultsText);
+
+    pokedex.appendChild(noResultsMessageContainer);
+
+}
+
+// Function that removes precious results
+function removePreviousResults() {
+    removeNoResultsMessage();
+
+    const previousResults = document.querySelectorAll(".card");
+    previousResults.forEach((result) => result.remove());
+}
+
+// Function that removes "no result" message
+function removeNoResultsMessage() {
+    const noResultsMessageContainer = document.querySelector('.no-results-container');
+    if (noResultsMessageContainer) {
+        noResultsMessageContainer.remove();
+    }
+}
+
+// Fetching pokemons
 const fetchPokemons = async () => {
     const getPokemon = async id => {
         try {
@@ -37,7 +82,7 @@ const fetchPokemons = async () => {
     i += 20;
     limit +=20;
 
-
+// Function that map through API properties
 
     const results = await Promise.all(promises);
     const pokemon = results.map((result) => ({
@@ -53,6 +98,7 @@ const fetchPokemons = async () => {
     displayPokemon(pokemon)
 }
 
+// Function that create pokemons card
 
 const displayPokemon = (pokemon) => {
 
