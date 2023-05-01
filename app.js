@@ -118,5 +118,7 @@ const displayPokemon = (pokemon) => {
 
 fetchPokemons();
 
+// comma
+
 
 
