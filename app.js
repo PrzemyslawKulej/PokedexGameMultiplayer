@@ -1,5 +1,9 @@
 const pokedex = document.getElementById('pokedex');
 const searchInput = document.getElementById('search-bar')
+const filterDiv = document.getElementById('filter-list-window')
+const filterButtons = document.querySelectorAll('.filter-button');
+const resetButton = document.getElementById('reset-button');
+const applyButton = document.getElementById('apply-button');
 
 let limit = 20;
 let i = 0;
@@ -88,8 +92,8 @@ const fetchPokemons = async () => {
     const pokemon = results.map((result) => ({
         name: result.name,
         image: result.sprites['front_default'],
-        type: result.types.map((type) => type.type.name),
-        id: result.id
+        type: result.types.map((type) => type.type.name).join('\n'),
+        id: String(result.id).padStart(4, '0')
     }));
     pokemonNames = pokemon.map((p) => ({
         name: p.name, image: p.image, type: p.type, id: p.id
@@ -106,9 +110,17 @@ const displayPokemon = (pokemon) => {
         .map(
             (pokemon) => `
         <li class="card">
-            <img class="card-image" src="${pokemon.image}"/>
+            <div class="card-image-wrapper">
+                <img class="card-image" src="${pokemon.image}"/>
+            </div>
+            <div class="card-id-wrapper">
+                <h3 class="card-id">#${pokemon.id}</h3>
+            </div>
             <h2 class="card-title">${pokemon.name}</h2>
-            <p class="card-subtitle">Type: ${pokemon.type}</p>
+            <div class="card-subtitle-wrapper">
+                <p class="card-subtitle">${pokemon.type}</p>
+            </div>
+           
         </li>
     `
         )
@@ -116,21 +128,60 @@ const displayPokemon = (pokemon) => {
     pokedex.innerHTML = pokemonHTMLString
 }
 
+
+// Filtr option in searchbar
+let isClicked = true;
+let showOrHide = () => {
+    if (isClicked) {
+        filterDiv.style.display = 'block';
+        isClicked = false;
+    } else {
+        filterDiv.style.display = 'none';
+        isClicked = true;
+    }
+}
+
+filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const selectedType = button.dataset.type; // Pobieranie wybranego typu
+
+        // Filtruj pokemony na podstawie wybranego typu
+        const filteredPokemons = pokemonNames.filter((pokemon) => {
+            return pokemon.type.includes(selectedType);
+        });
+
+        // Wyświetl wynik filtrowania
+        displayPokemon(filteredPokemons);
+    });
+
+
+});
+
+// Apply and Reset buttons functionality
+resetButton.addEventListener('click', () => {
+
+    filterButtons.forEach((btn) => {
+        btn.classList.remove('selected');
+    });
+});
+
+filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+
+        const selectedButton = document.querySelector('.filter-button.selected');
+        if (selectedButton) {
+            selectedButton.classList.remove('selected');
+        }
+
+
+        button.classList.add('selected');
+    });
+});
+
+
 fetchPokemons();
 
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
+
 
 
 
