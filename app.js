@@ -181,6 +181,8 @@ filterButtons.forEach((button) => {
 
 fetchPokemons();
 
+// comma
+
 
 
 
