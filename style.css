@@ -1,10 +1,12 @@
 html {
-    background-color: #f8e5e5;
+    background-color: #f0f0f0;
 }
 
 body {
 
     margin: 0;
+    overflow-x: hidden;
+
 
 
 
@@ -14,9 +16,9 @@ body {
     position: relative;
     margin: 0 auto;
     top: 0px;
-    max-width: 90vw;
+    max-width: 80vw;
     max-height: 80vh;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 #pokedex {
@@ -37,9 +39,9 @@ body {
     text-align: center;
 }
 
-.card:hover {
-    background-color: white;
-}
+/*.card:hover {*/
+/*    background-color: white;*/
+/*}*/
 
 .card-title {
     position: relative;
@@ -49,26 +51,31 @@ body {
     text-transform: capitalize;
     margin-bottom: 0px;
     font-size: 19px;
-    font-weight: normal;
+    font-weight: bold;
+    color: #303F9F;
 }
 
 .card-subtitle-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: relative;
-    top: -70px;
+    top: -90px;
     left: 170px;
-    width: 50px;
 
 }
 
 .card-subtitle {
-    margin-top: 5px;
+    margin-bottom: -9px;
     color: #fa6603;
     font-weight: lighter;
 }
 .card-id {
-    color: #D0CFCE;
-    font-weight: 500;
-
+    font-weight: bold;
+    background: -webkit-linear-gradient(45deg, rgba(255,166,0,1) 15%, rgba(23,170,221,1) 85%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
 }
 .card-id-wrapper {
@@ -104,8 +111,8 @@ body {
     margin: 0 auto;
     transform: translate(-50%);
     bottom: 0px;
-    width: 200px;
-    height: 50px;
+    width: 150px;
+    height: 40px;
     padding: 8px 16px;
     background: #cc1b1b;
     border: none;
@@ -207,10 +214,11 @@ input#search-bar{
     position: relative;
     width: 25px;
     height: 25px;
-    top: -80px;
-    left: 395px;
+    top: -110px;
+    left: 475px;
 
 }
+
 
 .filter-list:hover{
     opacity: 0.3;
@@ -220,7 +228,7 @@ input#search-bar{
     display: none;
     position: fixed;
     background-color: whitesmoke;
-    height: 300px;
+    height: 400px;
     width: 500px;
     top: 10vh;
     left: 37.7vw;
@@ -238,15 +246,15 @@ input#search-bar{
 
 .filter-button {
     width: calc((100% - 60px) / 5);
-    height: 30px;
+    height: 20px;
     background-color: gray;
     border: none;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    margin-left: 8px;
-    margin-right: 23px;
+    margin-left: 4px;
+    margin-right: 4px;
     color: white;
 
 }
@@ -279,13 +287,15 @@ input#search-bar{
 
 
 /*Filter buttons style*/
-.button-container {
+.control-button-container {
+    position: relative;
+    top: 100px;
     display: flex;
     justify-content: center;
     margin-top: 5px;
 }
 
-.button-container button {
+.control-button-container button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -305,7 +315,7 @@ input#search-bar{
 }
 
 .button-container button:hover {
-    background-color: white;
+    background-color: blue;
     color: #fc0202;
     border-color: #fc0202;
 }
@@ -315,7 +325,33 @@ input#search-bar{
 /*Styling "no result message"*/
 
 .no-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 auto;
+    width: 80%; /* Ustaw szerokość na 80% ekranu */
+    height: 80%; /* Ustaw wysokość na 80% ekranu */
+    position: fixed; /* Pozycja ustawiona na stałe, aby kontener pozostał na środku strony */
+    top: 50%; /* Centrowanie w pionie */
+    left: 50%; /* Centrowanie w poziomie */
+    transform: translate(-50%, -50%);
 
+
+}
+
+.no-results-container img {
+    width: 60%;
+    height: 60%;
+}
+
+.no-results-container p {
+    font-size: 24px;
+    color: #FF4500;
+    text-shadow: 2px 2px #FFD700;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
 }
 
 /* Logo styled */

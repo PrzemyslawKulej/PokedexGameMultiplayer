@@ -7,15 +7,19 @@
     <title>Pokemon Game</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
 
 
 </head>
 <body>
     <form class="search-container">
-        <input type="text" id="search-bar" placeholder="      Search for pokemons!"
+        <input type="text" id="search-bar" placeholder="      Search for pokemons!"/>
         <a href="#"><img class="search-icon" src="/images/search-icon.png"></a>
-        <a href="#"><img class="filter-list" src="/images/filter.png" id="filter-list-button" onclick="showOrHide()"></a>
+        <div id="filter-icon">
+            <a href="#"><img class="filter-list" src="/images/filter.png" id="filter-list-button" onclick="showOrHide()"></a>
+        </div>
+
     </form>
     <div id="filter-list-window" class="filter-container">
         <div class="filter-heading">
@@ -24,25 +28,11 @@
             <span class="filter-heading-line"></span>
         </div>
 
-        <div class="filter-buttons">
-        <button class="filter-button" data-type="fire">Fire</button>
-        <button class="filter-button" data-type="poison">Poison</button>
-        <button class="filter-button" data-type="water">Water</button>
-        <button class="filter-button" data-type="bug">Bug</button>
-        <button class="filter-button" data-type="flying">Flying</button>
-        <button class="filter-button" data-type="normal">Normal</button>
-        <button class="filter-button" data-type="electric">Electric</button>
-        <button class="filter-button" data-type="ground">Ground</button>
-        <button class="filter-button" data-type="fighting">Fighting</button>
-        <button class="filter-button" data-type="psychic">Psychic</button>
-        <button class="filter-button" data-type="steel">Steel</button>
-        <button class="filter-button" data-type="ice">Ice</button>
-        <button class="filter-button" data-type="ghost">Ghost</button>
-        <button class="filter-button" data-type="rock">Rock</button>
-        <button class="filter-button" data-type="dragon">Dragon</button>
+        <div id="type-buttons-container">
+
         </div>
 
-        <div class="button-container">
+        <div class="control-button-container">
             <button id="reset-button">Reset</button>
             <button id="apply-button">Apply</button>
         </div>
@@ -53,7 +43,7 @@
     </div>
 
     <button onclick="fetchPokemons()" class="button">
-        <span class="button_text">Load More</span>
+        <span class="button__text">Load More</span>
     </button>
 
 <script src="app.js"></script>
