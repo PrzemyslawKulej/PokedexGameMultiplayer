@@ -23,7 +23,7 @@ const commonBadgeStyle =
     "    border: none;\n" +
     "    border-radius: 5px;\n" +
     "    font-size: 16px;\n" +
-    "    width: 80px;\n" +
+    "    width: 90px;\n" +
     "    margin-top: 15px;\n" +
     "    margin-left: 4px;\n" +
     "    margin-right: 4px;\n" +
@@ -201,30 +201,36 @@ async function fetchTypes() {
 // Function that generate buttons in searchbar filter
 
 
+let pendingFilter = null;  // Nowa zmienna przechowująca filtr do momentu naciśnięcia Apply
+
 async function generateFilterButtons() {
     const types = await fetchTypes();
 
     types.forEach((type) => {
         const button = document.createElement('button');
-        button.classList.add('filter-button');
+        button.classList.add('filter-button-style');
         button.textContent = type.name;
         button.dataset.type = type.name;
+        button.style = pokemonTypeStyles[type.name];
 
         button.addEventListener('click', (event) => {
-            const currentSelectedButton = filterDiv.querySelector('.filter-button.selected');
+            const currentSelectedButton = filterDiv.querySelector('.filter-button-style.selected');
             if (currentSelectedButton) {
                 currentSelectedButton.classList.remove('selected');
             }
 
             button.classList.add('selected');
-            selectedFilter = button.dataset.type;
+            pendingFilter = button.dataset.type;  // Zapisujemy filtr do pendingFilter, ale nie stosujemy go od razu
         });
 
         filterButtonsContainer.appendChild(button);
     });
 }
 
+
 generateFilterButtons();
+
+
 
 
 // Filtr option in searchbar
@@ -245,24 +251,6 @@ filterDiv.addEventListener('click', (event) => {
 document.addEventListener('click', function() {
     // When we click outside the filterDiv or filter icon, we hide filterDiv
     filterDiv.style.display = 'none';
-});
-
-
-
-// Taking selected type
-filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        const selectedType = button.dataset.type;
-
-        // Filter Pokemon based on the selected type
-        const filteredPokemons = pokemonNames.filter((pokemon) => {
-            return pokemon.type.includes(selectedType);
-        });
-
-        // Show filter results
-        displayPokemon(filteredPokemons);
-    });
-
 
 });
 
@@ -270,8 +258,7 @@ filterButtons.forEach((button) => {
 
 //  Removing type after reset click
 resetButton.addEventListener('click', () => {
-    // Znajdź wszystkie przyciski i usuń z nich klasę 'selected'
-    const allButtons = document.querySelectorAll('.filter-button');
+    const allButtons = document.querySelectorAll('.filter-button-style');
     allButtons.forEach((btn) => {
         btn.classList.remove('selected');
     });
@@ -283,21 +270,9 @@ resetButton.addEventListener('click', () => {
     displayPokemon(pokemonNames);
 });
 
-filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-
-        const selectedButton = document.querySelector('.filter-button.selected');
-        if (selectedButton) {
-            selectedButton.classList.remove('selected');
-        }
-
-
-        button.classList.add('selected');
-        selectedFilter = button.dataset.type;
-    });
-});
-
 applyButton.addEventListener('click', () => {
+    // Dopiero po naciśnięciu przycisku 'apply' stosujemy filtr
+    selectedFilter = pendingFilter;
     if (selectedFilter) {
         const filteredPokemons = pokemonNames.filter((pokemon) => {
             return pokemon.type.includes(selectedFilter);
@@ -305,7 +280,6 @@ applyButton.addEventListener('click', () => {
         displayPokemon(filteredPokemons);
     }
 });
-
 document.addEventListener('click', function(event) {
     let isClickInsideElement = filterDiv.contains(event.target);
 

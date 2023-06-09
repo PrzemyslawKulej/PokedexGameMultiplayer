@@ -18,7 +18,7 @@ body {
     top: 0px;
     max-width: 80vw;
     max-height: 80vh;
-    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #pokedex {
@@ -228,16 +228,26 @@ input#search-bar{
     display: none;
     position: fixed;
     background-color: whitesmoke;
-    height: 400px;
+    height: 300px;
     width: 500px;
     top: 10vh;
     left: 37.7vw;
     border-radius: 10px;
     z-index: 1;
+    border: 2px solid grey;
+}
+#type-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 200px;
 }
 
 .filter-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -256,8 +266,39 @@ input#search-bar{
     margin-left: 4px;
     margin-right: 4px;
     color: white;
+    outline: 4px solid transparent;
 
 }
+.selected {
+    outline: 4px solid lightgreen;
+}
+
+.filter-button.inactive {
+    outline: none !important;
+}
+
+/*Filter button colors depends on type*/
+
+.filter-button.normal { background-color: #A8A77A; }
+.filter-button.fighting { background-color: #C22E28; }
+.filter-button.flying { background-color: #A98FF3; }
+.filter-button.poison { background-color: #A33EA1; }
+.filter-button.ground { background-color: #E2BF65; }
+.filter-button.rock { background-color: #B6A136; }
+.filter-button.bug { background-color: #A6B91A; }
+.filter-button.ghost { background-color: #735797; }
+.filter-button.steel { background-color: #B7B7CE; }
+.filter-button.fire { background-color: #EE8130; }
+.filter-button.water { background-color: #6390F0; }
+.filter-button.grass { background-color: #7AC74C; }
+.filter-button.electric { background-color: #F7D02C; }
+.filter-button.psychic { background-color: #F95587; }
+.filter-button.ice { background-color: #96D9D6; }
+.filter-button.dragon { background-color: #6F35FC; }
+.filter-button.dark { background-color: #705746; }
+.filter-button.fairy { background-color: #D685AD; }
+.filter-button.unknown { background-color: #B3B3B3; }
+.filter-button.shadow { background-color: #3C3C44; }
 
 /* Dodatkowe style dla efektu najechania na przycisk */
 .filter-button:hover {
@@ -289,7 +330,7 @@ input#search-bar{
 /*Filter buttons style*/
 .control-button-container {
     position: relative;
-    top: 100px;
+    top: 40px;
     display: flex;
     justify-content: center;
     margin-top: 5px;
@@ -307,17 +348,22 @@ input#search-bar{
     color: gray;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s; /* Dodajemy zmianę koloru */
     margin-top: 40px ;
     margin-left: 5px;
     margin-right: 5px;
 
 }
 
-.button-container button:hover {
-    background-color: blue;
-    color: #fc0202;
-    border-color: #fc0202;
+.control-button-container button:hover {
+    background-color: #fc0202; /* Kolor tła na czerwono */
+    color: white; /* Kolor tekstu na biało */
+    border-color: #fc0202; /* Kolor ramki na czerwono */
+}
+
+.control-button-container button:active {
+    transform: scale(0.95); /* Skala zmniejsza się, imitując efekt naciśnięcia przycisku */
+    transition: transform 0.1s; /* Dodajemy przejście dla efektu naciśnięcia */
 }
 
 
@@ -331,11 +377,11 @@ input#search-bar{
     justify-content: center;
     padding: 20px;
     margin: 0 auto;
-    width: 80%; /* Ustaw szerokość na 80% ekranu */
-    height: 80%; /* Ustaw wysokość na 80% ekranu */
-    position: fixed; /* Pozycja ustawiona na stałe, aby kontener pozostał na środku strony */
-    top: 50%; /* Centrowanie w pionie */
-    left: 50%; /* Centrowanie w poziomie */
+    width: 80%;
+    height: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
 
@@ -354,5 +400,25 @@ input#search-bar{
     font-weight: bold;
 }
 
-/* Logo styled */
+/*Scroll styled*/
 
+.container::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+.container::-webkit-scrollbar-track {
+    background: #c0c4bd;
+    border-radius: 10px;
+}
+
+
+.container::-webkit-scrollbar-thumb {
+    background: rgba(255,166,0,1);
+    border-radius: 10px;
+}
+
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: rgba(23,170,221,1);
+}
