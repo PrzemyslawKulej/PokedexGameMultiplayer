@@ -297,6 +297,7 @@ document.addEventListener('click', function(event) {
 fetchPokemons();
 
 // comma
+// comma
 
 
 
