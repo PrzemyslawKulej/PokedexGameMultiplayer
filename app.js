@@ -1,11 +1,15 @@
 const pokedex = document.getElementById('pokedex');
 const searchInput = document.getElementById('search-bar')
+
 const filterIcon = document.getElementById('filter-icon');
 const filterDiv = document.getElementById('filter-list-window')
 const filterButtons = document.querySelectorAll('.filter-button');
 const filterButtonsContainer = document.getElementById('type-buttons-container')
+
 const resetButton = document.getElementById('reset-button');
 const applyButton = document.getElementById('apply-button');
+
+const cards = document.querySelectorAll('.card');
 
 
 let limit = 20;
@@ -137,10 +141,11 @@ const fetchPokemons = async () => {
         name: result.name,
         image: result.sprites['front_default'],
         type: result.types.map((type) => type.type.name),
-        id: String(result.id).padStart(4, '0')
+        id: result.id,
+        displayId: String(result.id).padStart(4, '0')
     }));
     pokemonNames = pokemon.map((p) => ({
-        name: p.name, image: p.image, type: p.type, id: p.id
+        name: p.name, image: p.image, type: p.type, id: p.id, displayId: p.displayId
 
     }));
     // If a filter is selected, apply it
@@ -152,6 +157,14 @@ const fetchPokemons = async () => {
     } else {
         displayPokemon(pokemonNames);
     }
+
+
+        const cards = document.querySelectorAll('.flip-container');
+        cards.forEach(card => {
+            card.addEventListener('click', flipCard);
+        });
+
+
 }
 
 
@@ -164,25 +177,34 @@ const displayPokemon = (pokemon) => {
     const pokemonHTMLString = pokemon
         .map(
             (pokemon) => `
-    <li class="card">
-        <div class="card-image-wrapper">
-            <img class="card-image" src="${pokemon.image}"/>
-        </div>
-        <div class="card-id-wrapper">
-            <h3 class="card-id">#${pokemon.id}</h3>
-        </div>
-        <h2 class="card-title">${pokemon.name}</h2>
-        <div class="card-subtitle-wrapper">
-            ${pokemon.type.map(type => `<span class="card-subtitle" style="${pokemonTypeStyles[type]}">${type}</span>`).join('')}
-        </div>
-       
-    </li>
-`
+                <li class="card">
+                    <div class="flip-card" data-id="${pokemon.id}">
+                        <div class="flip-card-inner">
+                            <div class="flip-container">
+                                <div class="flip-card-front">
+                                    <div class="card-image-wrapper">
+                                        <img class="card-image" src="${pokemon.image}"/>
+                                    </div>
+                                    <div class="card-id-wrapper">
+                                        <h3 class="card-id">#${pokemon.displayId}</h3>
+                                    </div>
+                                    <h2 class="card-title">${pokemon.name}</h2>
+                                    <div class="card-subtitle-wrapper">
+                                        ${pokemon.type.map(type => `<span class="card-subtitle" style="${pokemonTypeStyles[type]}">${type}</span>`).join('')}
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <!-- Tu można dodać dodatkowe informacje, które mają się pokazać po całkowitym obrocie karty -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            `
         )
         .join('');
     pokedex.innerHTML = pokemonHTMLString
 }
-
 
 
 // Function that fetch types to searchbar filter
@@ -292,6 +314,34 @@ document.addEventListener('click', function(event) {
         }
     }
 });
+
+// Rotating the card
+
+
+const fetchPokemonDetails = async (id) => {
+    try {
+        const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+        const res = await fetch(url);
+        const details = await res.json();
+        return details;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+async function flipCard() {
+    console.log("flipCard called")
+    this.classList.add('flipped');
+
+    const id = this.closest('.flip-card').dataset.id;
+    const pokemonDetails = await fetchPokemonDetails(id);
+
+    const cardBack = this.querySelector('.flip-card-back');
+    cardBack.innerHTML = `
+        <h3>Stats</h3>
+        ${pokemonDetails.stats.map(stat => `<p>${stat.stat.name}: ${stat.base_stat}</p>`).join('')}
+    `;
+}
 
 
 fetchPokemons();
