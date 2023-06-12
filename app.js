@@ -9,7 +9,7 @@ const filterButtonsContainer = document.getElementById('type-buttons-container')
 const resetButton = document.getElementById('reset-button');
 const applyButton = document.getElementById('apply-button');
 
-const cards = document.querySelectorAll('.card');
+
 
 
 let limit = 20;
@@ -114,7 +114,6 @@ function removeNoResultsMessage() {
     }
 }
 
-// Fetching pokemons
 const fetchPokemons = async () => {
     const getPokemon = async id => {
         try {
@@ -159,10 +158,10 @@ const fetchPokemons = async () => {
     }
 
 
-        const cards = document.querySelectorAll('.flip-container');
-        cards.forEach(card => {
-            card.addEventListener('click', flipCard);
-        });
+    const cards = document.querySelectorAll('.flip-container');
+    cards.forEach(card => {
+        card.addEventListener('click', flipCard);
+    });
 
 
 }
@@ -180,8 +179,8 @@ const displayPokemon = (pokemon) => {
                 <li class="card">
                     <div class="flip-card" data-id="${pokemon.id}">
                         <div class="flip-card-inner">
-                            <div class="flip-container">
-                                <div class="flip-card-front">
+                            <div class="flip-card-front">
+                                <div class="flip-container">
                                     <div class="card-image-wrapper">
                                         <img class="card-image" src="${pokemon.image}"/>
                                     </div>
@@ -193,9 +192,9 @@ const displayPokemon = (pokemon) => {
                                         ${pokemon.type.map(type => `<span class="card-subtitle" style="${pokemonTypeStyles[type]}">${type}</span>`).join('')}
                                     </div>
                                 </div>
-                                <div class="flip-card-back">
-                                    <!-- Tu można dodać dodatkowe informacje, które mają się pokazać po całkowitym obrocie karty -->
-                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="card-back"></div>
                             </div>
                         </div>
                     </div>
@@ -204,6 +203,12 @@ const displayPokemon = (pokemon) => {
         )
         .join('');
     pokedex.innerHTML = pokemonHTMLString
+
+    const cards = document.querySelectorAll('.flip-card');
+    cards.forEach(card => {
+        card.addEventListener('click', flipCard);
+    });
+
 }
 
 
@@ -329,27 +334,63 @@ const fetchPokemonDetails = async (id) => {
     }
 }
 
+
+
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    // Pobieranie wszystkich kart
+    const cards = document.querySelectorAll('.flip-card');
+
+    // Dodanie zdarzenia click do każdej karty
+    cards.forEach((card) => {
+        card.addEventListener('click', flipCard);
+    });
+});
+
 async function flipCard() {
     console.log("flipCard called")
-    this.classList.add('flipped');
 
+    const cardImageWrapper = this.querySelector('.card-image-wrapper');
+    const cardImage = this.querySelector('.card-image');
+    const cardBack = this.querySelector('.flip-card-back .card-back');
+
+    const isFlipped = cardImageWrapper.classList.contains('flipped');
     const id = this.closest('.flip-card').dataset.id;
-    const pokemonDetails = await fetchPokemonDetails(id);
 
-    const cardBack = this.querySelector('.flip-card-back');
-    cardBack.innerHTML = `
-        <h3>Stats</h3>
-        ${pokemonDetails.stats.map(stat => `<p>${stat.stat.name}: ${stat.base_stat}</p>`).join('')}
-    `;
+    if (!isFlipped) {
+        const pokemonDetails = await fetchPokemonDetails(id);
+        console.log(pokemonDetails);
+        console.log(cardBack)
+        cardBack.innerHTML = `
+            <h3>Stats</h3> 
+            ${pokemonDetails.stats.map(stat => `<p>${stat.stat.name}: ${stat.base_stat}</p>`).join('')}
+        `;
+        cardImageWrapper.classList.add('flipped');
+        cardImage.style.visibility = 'hidden';
+    } else {
+        cardBack.innerHTML = '';
+        cardImageWrapper.classList.remove('flipped');
+        cardImage.style.visibility = 'visible';
+    }
 }
+
+// Statics icons
+
+const statIcons = {
+    'hp': 'images/hearticon.png',
+    'attack': 'images/attackicon.png',
+    'defense': 'images/defenseicon.png',
+    'speed': 'images/speedicon.png',
+    'special-attack': 'path/to/hp.png',
+    'special-defense': 'path/to/attack.png',
+
+};
+
+
 
 
 fetchPokemons();
 
 // comma
 // comma
-
-
-
-
-

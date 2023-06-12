@@ -92,6 +92,8 @@ body {
     width: 280px;
     height: 200px;
     border-radius: 15%;
+    transition: transform 0.6s;
+    transform-origin: center;
 }
 
 .card-image {
@@ -103,61 +105,65 @@ body {
     border-radius: 10%;
 }
 
-/*Rotating card*/
-.flip-container {
-    perspective: 1000px;
-    width: 280px;
-    height: 200px;
+/*Card rotate*/
+
+
+.flip-card {
+    height: 250px;
+    z-index: 1;
+    perspective: 1000px; /* Dodaj tę właściwość */
+}
+
+.flip-card-inner {
     position: relative;
+    height: 250px;
+    /*transition: transform 0.6s;*/
+    /*transform-style: preserve-3d;*/
+    /*width: 100%; !* Dodaj tę właściwość *!*/
 }
 
-.flip-container:hover .card-image-wrapper {
-    /*transform: rotateY(180deg);*/
-}
-
-.card-image-wrapper {
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.card-image-front,
-.card-image-back {
-    backface-visibility: hidden;
+.flip-card-front {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    /*-webkit-backface-visibility: hidden; !* dla Safari *!*/
+    /*!*backface-visibility: hidden;*!*/
     height: 100%;
+    width: 100%;
+    transform: rotateY(0deg); /* Dodaj tę właściwość */
 }
 
-.card-image-front {
-    background-color: #c0c4bd;
-    border-radius: 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
+.flip-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: visible; /* dla Safari */
+    backface-visibility: visible;
+    height: 100%;
+    width: 100%;
+    /*transform: rotateY(180deg); !* Dodaj tę właściwość *!*/
 }
 
-.card-image-back {
-    background-color: #c0c4bd;
-    border-radius: 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.card-back {
+    position: relative;
+    width: 100%; /* Aktualizuj tę wartość */
+    height: 100%; /* Aktualizuj tę wartość */
+}
+
+.card-image-wrapper.flipped {
     transform: rotateY(180deg);
 }
 
-.card-image-front img {
-    width: 100%;
-    height: auto;
-    border-radius: 15%;
+/*.hidden {*/
+/*    display: none;*/
+/*}*/
+
+.flip-card-back p {
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
 }
+
 /* button style */
 
 .button {
@@ -477,6 +483,3 @@ input#search-bar{
 .container::-webkit-scrollbar-thumb:hover {
     background: rgba(23,170,221,1);
 }
-
-/*BACK OF THE CARD*/
-
