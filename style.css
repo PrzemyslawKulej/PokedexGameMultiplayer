@@ -109,46 +109,41 @@ body {
 
 
 .flip-card {
-    height: 250px;
-    z-index: 1;
-    perspective: 1000px; /* Dodaj tę właściwość */
+    perspective: 1000px;
+    cursor: pointer;
 }
 
 .flip-card-inner {
-    position: relative;
-    height: 250px;
-    /*transition: transform 0.6s;*/
-    /*transform-style: preserve-3d;*/
-    /*width: 100%; !* Dodaj tę właściwość *!*/
-}
-
-.flip-card-front {
-    position: absolute;
-    top: 0;
-    left: 0;
-    /*-webkit-backface-visibility: hidden; !* dla Safari *!*/
-    /*!*backface-visibility: hidden;*!*/
-    height: 100%;
     width: 100%;
-    transform: rotateY(0deg); /* Dodaj tę właściwość */
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
 }
 
+.flip-card-front,
 .flip-card-back {
     position: absolute;
     top: 0;
     left: 0;
-    -webkit-backface-visibility: visible; /* dla Safari */
-    backface-visibility: visible;
-    height: 100%;
     width: 100%;
-    /*transform: rotateY(180deg); !* Dodaj tę właściwość *!*/
+    height: 100%;
+
 }
 
 .card-back {
     position: relative;
-    width: 100%; /* Aktualizuj tę wartość */
-    height: 100%; /* Aktualizuj tę wartość */
+    left: -15px;
 }
+
+.flip-card-back .card-back .card-back-content {
+    transform: rotateY(360deg);
+}
+
+/*.flipped .flip-card-inner {*/
+/*    transform: rotateY(180deg);*/
+/*}*/
+
+
 
 .card-image-wrapper.flipped {
     transform: rotateY(180deg);

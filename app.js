@@ -172,7 +172,6 @@ const fetchPokemons = async () => {
 // Function that create pokemons cards
 
 const displayPokemon = (pokemon) => {
-
     const pokemonHTMLString = pokemon
         .map(
             (pokemon) => `
@@ -194,7 +193,11 @@ const displayPokemon = (pokemon) => {
                                 </div>
                             </div>
                             <div class="flip-card-back">
-                                <div class="card-back"></div>
+                                <div class="card-back">
+                                    <div class="card-back-content">
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -202,13 +205,12 @@ const displayPokemon = (pokemon) => {
             `
         )
         .join('');
-    pokedex.innerHTML = pokemonHTMLString
+    pokedex.innerHTML = pokemonHTMLString;
 
     const cards = document.querySelectorAll('.flip-card');
     cards.forEach(card => {
         card.addEventListener('click', flipCard);
     });
-
 }
 
 
@@ -353,7 +355,7 @@ async function flipCard() {
 
     const cardImageWrapper = this.querySelector('.card-image-wrapper');
     const cardImage = this.querySelector('.card-image');
-    const cardBack = this.querySelector('.flip-card-back .card-back');
+    const cardBack = this.querySelector('.flip-card-back .card-back .card-back-content');
 
     const isFlipped = cardImageWrapper.classList.contains('flipped');
     const id = this.closest('.flip-card').dataset.id;
@@ -368,6 +370,9 @@ async function flipCard() {
         `;
         cardImageWrapper.classList.add('flipped');
         cardImage.style.visibility = 'hidden';
+
+
+
     } else {
         cardBack.innerHTML = '';
         cardImageWrapper.classList.remove('flipped');
