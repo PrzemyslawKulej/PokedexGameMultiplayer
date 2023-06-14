@@ -476,5 +476,7 @@ input#search-bar{
 
 
 .container::-webkit-scrollbar-thumb:hover {
-    background: rgba(23,170,221,1);
+    background: rgba(23, 170, 221, 1);
 }
+
+/*comma*/
