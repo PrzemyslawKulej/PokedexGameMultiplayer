@@ -8,11 +8,11 @@ mongoose.connect('mongodb://localhost:27017/myapp')
     .catch((err) => console.error('Could not connect to MongoDB', err));
 
 app.get('/', (req, res) => {
-    res.send('Serwer działa poprawnie!');
+    res.send('Server is working!');
 });
 
 app.listen(port, () => {
-    console.log(`Serwer nasłuchuje na http://localhost:${port}`);
+    console.log(`Server listen at http://localhost:${port}`);
 });
 
 
