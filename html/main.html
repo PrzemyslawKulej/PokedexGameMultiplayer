@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+</head>
+<header>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="../main%20images/pokemon%20logo.png" alt="Logo">
+        </div>
+        <div class="navbar-links">
+            <a href="#" class="navbar-link">Play Game</a>
+            <a href="index.html" class="navbar-link">Pokedex</a>
+            <a href="#" class="navbar-link">Gallery</a>
+            <a href="#" class="navbar-link">About</a>
+        </div>
+        <div class="navbar-buttons">
+            <button id="signup-button" class="navbar-button">Sign In</button>
+        </div>
+    </nav>
+</header>
+<body>
+<div class="video-container">
+    <video autoplay loop muted>
+        <source src="../main%20images/videoplayback.mp4" type="video/mp4">
+        <source src="video.webm" type="video/webm">
+    </video>
+</div>
+
+<!-- Sign Up Modal -->
+<div id="signup-modal" class="modal">
+    <div class="modal-content">
+        <div class="form-box">
+            <span class="close-button">&times;</span>
+            <h2>Login</h2>
+                <form id="signup-form" action="#">
+
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="mail"></ion-icon>
+                        </span>
+                        <input type="email" placeholder="Email" required>
+                        <label class="input-text">Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password" placeholder="Password" required>
+                        <label class="input-text">Password</label>
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox">
+                        Remember me
+                        </label>
+                    </div>
+                    <button type="submit" class="login-btn">Log In</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="../js/main.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
