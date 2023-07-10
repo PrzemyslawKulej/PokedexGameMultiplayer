@@ -32,37 +32,85 @@
 
 <!-- Sign Up Modal -->
 <div id="signup-modal" class="modal">
-    <div class="modal-content">
-        <div class="form-box">
-            <span class="close-button">&times;</span>
+    <div class="modal-container">
+        <div class="form-box login">
+                <span class="close-button">
+                    <ion-icon name="close"></ion-icon>
+                </span>
             <h2>Login</h2>
-                <form id="signup-form" action="#">
+            <form action="#">
 
-                    <div class="input-box">
-                        <span class="icon">
-                            <ion-icon name="mail"></ion-icon>
-                        </span>
-                        <input type="email" placeholder="Email" required>
-                        <label class="input-text">Email</label>
-                    </div>
-                    <div class="input-box">
-                        <span class="icon">
-                            <ion-icon name="lock-closed"></ion-icon>
-                        </span>
-                        <input type="password" placeholder="Password" required>
-                        <label class="input-text">Password</label>
-                    </div>
-                    <div class="remember-forgot">
-                        <label><input type="checkbox">
+                <div class="input-box">
+                            <span class="icon">
+                                <ion-icon name="mail"></ion-icon>
+                            </span>
+                    <input type="email" placeholder="Email" required>
+                    <label class="input-text">Email</label>
+                </div>
+                <div class="input-box">
+                            <span class="icon">
+                                <ion-icon name="lock-closed"></ion-icon>
+                            </span>
+                    <input type="password" placeholder="Password" required>
+                    <label class="input-text">Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">
                         Remember me
-                        </label>
-                    </div>
-                    <button type="submit" class="login-btn">Log In</button>
-                    <div class="login-register">
-                        <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
-                    </div>
-                </form>
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">Log In</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                </div>
+            </form>
+
+
         </div>
+
+
+    <!--    Register Modal-->
+
+        <div class="form-box register">
+            <span class="close-button">
+                <ion-icon name="close"></ion-icon>
+            </span>
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="person"></ion-icon>
+                    </span>
+                    <input type="email" placeholder="Email" required>
+                    <label class="input-text">Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="email" placeholder="Email" required>
+                    <label class="input-text">Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" placeholder="Password" required>
+                    <label class="input-text">Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">
+                        I agree to the terms & conditions
+                    </label>
+                </div>
+                <button type="submit" class="login-btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 
