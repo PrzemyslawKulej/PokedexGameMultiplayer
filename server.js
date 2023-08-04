@@ -77,21 +77,4 @@ router.post('/login', async (req, res) => {
 
 app.use('/api/users', router);
 
-// comma
-// comm
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
-// comma
+// turn on database
