@@ -79,4 +79,5 @@ app.use('/api/users', router);
 
 // turn on database
 // testing api
-// fixing front bugs
+// fixing front bugst
+// trying to implement websocketio
