@@ -1,10 +1,13 @@
-const mongoose = require('mongoose').default;
-const express = require('express');
-const bcrypt = require('bcrypt');
-const router = express.Router();
-const path = require('path');
-const app = express();
-const port = 3000;
+import * as mongoose from "mongoose";
+import * as express from "express";
+import * as bcrypt from "bcrypt";
+import * as path from "path";
+import {Router} from "express";
+
+
+const router: Router = express.Router();
+const app: express.Express = express();
+const port: number = 3000;
 
 
 
