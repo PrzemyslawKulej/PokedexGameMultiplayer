@@ -3,6 +3,7 @@ import * as express from "express";
 import * as bcrypt from "bcrypt";
 import * as path from "path";
 import {Router} from "express";
+import * as fs from "fs";
 
 
 const router: Router = express.Router();
@@ -80,10 +81,3 @@ router.post('/login', async (req, res) => {
 
 app.use('/api/users', router);
 
-// turn on database
-// testing api
-// fixing front bugst
-// trying to implement websocketio
-// adding front elements
-// improving front elements
-// adding ts
