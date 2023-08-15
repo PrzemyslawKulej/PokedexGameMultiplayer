@@ -1,8 +1,7 @@
 import * as mongoose from "mongoose";
-import * as express from "express";
+import express, { Request, Response, Router } from "express";
 import * as bcrypt from "bcrypt";
 import * as path from "path";
-import {Router} from "express";
 import * as fs from "fs";
 
 
@@ -24,13 +23,19 @@ mongoose.connect('mongodb://localhost:27017/myapp')
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+interface IUser {
+    username: string;
+    mail: string;
+    password: string;
+}
+
+const UserSchema = new Schema<IUser>({
     username: { type: String, required: true },
     mail: {type: String, required: true},
     password: { type: String, required: true }
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model<IUser>('User', UserSchema);
 
 // This line enables the parsing of request bodies as JSON
 app.use(express.json());
@@ -42,7 +47,7 @@ app.set('views', path.join(__dirname, '/views'));
 // To serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.render('main');
 });
 
@@ -80,4 +85,7 @@ router.post('/login', async (req, res) => {
 });
 
 app.use('/api/users', router);
+
+
+// testing swc
 
