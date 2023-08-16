@@ -19,7 +19,7 @@ app.listen(port, () => {
 
 mongoose.connect('mongodb://localhost:27017/myapp')
     .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => console.error('Could not connect to MongoDB', err));
+    .catch((err: mongoose.Error) => console.error('Could not connect to MongoDB', err));
 
 const Schema = mongoose.Schema;
 
@@ -51,10 +51,21 @@ app.get('/', (req: Request, res: Response) => {
     res.render('main');
 });
 
-router.post('/register', async (req, res) => {
+enum HttpStatusCode {
+    BAD_REQUEST = 400,
+    OK = 200,
+}
+
+interface RegisterRequestedBody {
+    username: string;
+    email: string;
+    password: string;
+}
+
+router.post('/register', async (req: Request<{}, {}, RegisterRequestedBody>, res: Response): Promise<Response> => {
     // Check, if user exist
     const existingUser = await User.findOne({ username: req.body.username });
-    if (existingUser) return res.status(400).send('User already exist.');
+    if (existingUser) return res.status(HttpStatusCode.BAD_REQUEST).send('User already exist.');
 
     // Hashing password
     const salt = await bcrypt.genSalt(10);
@@ -63,7 +74,7 @@ router.post('/register', async (req, res) => {
     // Create new user
     let user = new User({
         username: req.body.username,
-        mail: req.body.mail,
+        mail: req.body.email,
         password: hashedPassword
     });
     user = await user.save();
@@ -72,7 +83,13 @@ router.post('/register', async (req, res) => {
 });
 
 // User login
-router.post('/login', async (req, res) => {
+
+interface LoginRequestBody {
+    username: string;
+    password: string;
+}
+
+router.post('/login', async (req: Request<{}, {}, LoginRequestBody>, res: Response): Promise<Response> => {
     // Check, if user exist
     const user = await User.findOne({ username: req.body.username });
     if (!user) return res.status(400).send('Wrong email or password.');
@@ -81,7 +98,7 @@ router.post('/login', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Wrong email or password.');
 
-    res.send('Logged sucesfull!');
+    res.send('Logged succesfull!');
 });
 
 app.use('/api/users', router);

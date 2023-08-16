@@ -1,22 +1,22 @@
-const pokedex = document.getElementById('pokedex');
-const searchInput = document.getElementById('search-bar')
+const pokedex = document.getElementById('pokedex')as HTMLElement;
+const searchInput = document.getElementById('search-bar')as HTMLElement;
 
-const filterIcon = document.getElementById('filter-icon');
-const filterDiv = document.getElementById('filter-list-window')
-const filterButtons = document.querySelectorAll('.filter-button');
-const filterButtonsContainer = document.getElementById('type-buttons-container')
+const filterIcon = document.getElementById('filter-icon')as HTMLElement;
+const filterDiv = document.getElementById('filter-list-window')as HTMLElement;
+const filterButtons = document.querySelectorAll<HTMLElement>('.filter-button');
+const filterButtonsContainer = document.getElementById('type-buttons-container')as HTMLElement;
 
-const resetButton = document.getElementById('reset-button');
-const applyButton = document.getElementById('apply-button');
-
-
+const resetButton = document.getElementById('reset-button')as HTMLElement;
+const applyButton = document.getElementById('apply-button')as HTMLElement;
 
 
-let limit = 20;
-let i = 0;
+
+
+let limit: number = 20;
+let i: number = 0;
 
 // Variable storing type of pokemon
-let selectedFilter = null;
+let selectedFilter: null = null;
 
 let pokemonNames = []
 
