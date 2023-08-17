@@ -1,11 +1,11 @@
 import * as mongoose from "mongoose";
-import express, { Request, Response, Router } from "express";
+import * as express from 'express';
 import * as bcrypt from "bcrypt";
 import * as path from "path";
 import * as fs from "fs";
 
 
-const router: Router = express.Router();
+const router: express.Router = express.Router();
 const app: express.Express = express();
 const port: number = 3000;
 
@@ -47,7 +47,7 @@ app.set('views', path.join(__dirname, '/views'));
 // To serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: express.Request, res: express.Response) => {
     res.render('main');
 });
 
@@ -62,7 +62,7 @@ interface RegisterRequestedBody {
     password: string;
 }
 
-router.post('/register', async (req: Request<{}, {}, RegisterRequestedBody>, res: Response): Promise<Response> => {
+router.post('/register', async (req: express.Request<{}, {}, RegisterRequestedBody>, res: express.Response): Promise<express.Response> => {
     // Check, if user exist
     const existingUser = await User.findOne({ username: req.body.username });
     if (existingUser) return res.status(HttpStatusCode.BAD_REQUEST).send('User already exist.');
@@ -89,7 +89,7 @@ interface LoginRequestBody {
     password: string;
 }
 
-router.post('/login', async (req: Request<{}, {}, LoginRequestBody>, res: Response): Promise<Response> => {
+router.post('/login', async (req: express.Request<{}, {}, LoginRequestBody>, res: express.Response): Promise<express.Response> => {
     // Check, if user exist
     const user = await User.findOne({ username: req.body.username });
     if (!user) return res.status(400).send('Wrong email or password.');
@@ -105,4 +105,5 @@ app.use('/api/users', router);
 
 
 // testing swc
+// z
 
