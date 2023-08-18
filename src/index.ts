@@ -3,11 +3,13 @@ import * as express from 'express';
 import * as bcrypt from "bcrypt";
 import * as path from "path";
 import * as fs from "fs";
+import * as mongodb from "./mongodb";
 
 
 const router: express.Router = express.Router();
 const app: express.Express = express();
 const port: number = 3000;
+const viewsPath: string = path.join(__dirname, '/views');
 
 
 
@@ -15,34 +17,15 @@ app.listen(port, () => {
     console.log(`Server listen at http://localhost:${port}`);
 });
 
-// MongoDB configuration
-
-mongoose.connect('mongodb://localhost:27017/myapp')
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((err: mongoose.Error) => console.error('Could not connect to MongoDB', err));
-
-const Schema = mongoose.Schema;
-
-interface IUser {
-    username: string;
-    mail: string;
-    password: string;
-}
-
-const UserSchema = new Schema<IUser>({
-    username: { type: String, required: true },
-    mail: {type: String, required: true},
-    password: { type: String, required: true }
-});
+// Setting EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', viewsPath);
 
 const User = mongoose.model<IUser>('User', UserSchema);
 
 // This line enables the parsing of request bodies as JSON
 app.use(express.json());
 
-// Setting EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
 
 // To serve static files
 app.use(express.static(path.join(__dirname, 'public')));
