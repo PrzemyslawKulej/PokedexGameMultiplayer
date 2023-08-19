@@ -1,15 +1,24 @@
 import * as mongoose from "mongoose";
-import * as express from 'express';
+import express from 'express';
 import * as bcrypt from "bcrypt";
 import * as path from "path";
+import * as dotenv from "dotenv";
 import * as fs from "fs";
-import * as mongodb from "./mongodb";
+import User from "./mongodb";
+
+
+dotenv.config();
+
 
 
 const router: express.Router = express.Router();
 const app: express.Express = express();
-const port: number = 3000;
+const port: string = process.env.SERVER_PORT;
 const viewsPath: string = path.join(__dirname, '/views');
+
+
+
+
 
 
 
@@ -21,7 +30,6 @@ app.listen(port, () => {
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 
-const User = mongoose.model<IUser>('User', UserSchema);
 
 // This line enables the parsing of request bodies as JSON
 app.use(express.json());
